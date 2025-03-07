@@ -1,0 +1,97 @@
+/* header.css */
+
+/* 기본적인 헤더 스타일 */
+.header {
+    background-color: #1a202c;
+    color: #ffffff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.header-nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem 1.5rem;
+    max-width: 1120px;
+    margin: 0 auto;
+    width: 100%;
+}
+
+/* 왼쪽 로고 및 네비게이션 */
+.header-left {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    flex-grow: 1; /* 남은 공간을 모두 차지하도록 */
+    justify-content: center; /* 가운데 정렬 */
+}
+
+.header-left a {
+    font-size: 1.25rem;
+    font-weight: bold;
+    color: #63b3ed;
+}
+
+.header-left span {
+    font-size: 1.5rem; /* 글씨 크기 키우기 */
+    color: #ffffff; /* 글씨 색상 변경 */
+    font-weight: bold; /* 글씨 두껍게 */
+    text-align: center; /* 텍스트 가운데 정렬 */
+}
+
+/* 로그인 상태에 따른 버튼 */
+.header-login,
+.header-logged-in {
+    display: flex;
+    gap: 1rem;
+}
+
+.header-login a,
+.header-logged-in a {
+    padding: 0.5rem 1rem;
+    border-radius: 0.375rem;
+    font-size: 1rem;
+}
+
+.header-login .login-btn {
+    background-color: #3182ce;
+}
+
+.header-login .register-btn {
+    background-color: #38a169;
+}
+
+.header-logged-in .welcome-msg {
+    font-size: 1.125rem;
+    color: #fbd38d;
+    display: flex;
+    align-items: center; /* 세로 정렬을 가운데로 */
+}
+
+.header-logged-in .write-post-btn,
+.header-logged-in .logout-btn,
+.header-logged-in .my-page-btn {
+    font-size: 1.125rem;
+    color: #63b3ed;
+}
+
+/* 로그인 후 버튼 색상 변경 */
+.header-login a:hover,
+.header-logged-in a:hover {
+    opacity: 0.8;
+}
+
+/* 관리자 전용 */
+.header-admin {
+    display: flex;
+    gap: 1rem;
+}
+
+.header-admin a {
+    font-size: 0.875rem;
+    color: #e2e8f0;
+}
+
+.header-admin a:hover {
+    color: #ffffff;
+}

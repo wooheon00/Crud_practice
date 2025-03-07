@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>글 작성</title>
+    <link rel="stylesheet" th:href="@{~/css/post-writing.css}">
+    <link rel="stylesheet" th:href="@{~/css/header.css}">
+</head>
+<body>
+
+<div th:replace="~{header :: header}"></div>
+
+<!-- 글 작성 폼 -->
+<div class="form-container">
+    <h1>글 작성</h1>
+
+    <form action="/check/post" method="POST" onsubmit="validatePost(event)">
+        <div class="form-field">
+            <input name="title" placeholder="글 제목" class="input-field">
+        </div>
+
+        <div class="form-field">
+            <input name="content" placeholder="글 내용" class="input-field">
+        </div>
+
+        <button type="submit" class="submit-btn">글 등록</button>
+    </form>
+</div>
+
+<script>
+    function validatePost(event) {
+        let title = document.querySelector("input[name='title']");
+        let content = document.querySelector("input[name='content']");
+
+        if (!title.value.trim()) {
+            alert("글 제목을 입력하세요.");
+            event.preventDefault(); // 폼 전송 방지
+            return;
+        }
+
+        if (!content.value.trim()) {
+            alert("글 내용을 입력하세요.");
+            event.preventDefault(); // 폼 전송 방지
+            return;
+        }
+    }
+</script>
+
+</body>
+</html>

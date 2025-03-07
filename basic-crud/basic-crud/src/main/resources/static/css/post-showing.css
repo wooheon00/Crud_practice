@@ -1,0 +1,79 @@
+/* 기본 스타일 */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+}
+
+h1 {
+    text-align: center;
+    margin-top: 50px;
+}
+
+/* 게시글 목록 컨테이너 */
+.post-list-container {
+    width: 80%;
+    margin: 0 auto;
+}
+
+/* 게시글 항목 스타일 */
+.post-item {
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: center;
+}
+
+/* 게시글 링크 */
+.post-link {
+    text-decoration: none;
+    color: inherit;
+    width: 100%;
+}
+
+/* 게시글 박스 */
+.post-box {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: white;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+/* 호버 시 배경색 변경 */
+.post-box:hover {
+    background-color: #f0f0f0;
+}
+
+/* 제목 스타일 */
+.post-title {
+    font-size: 1.3em;
+    font-weight: bold;
+}
+
+/* 작성자 스타일 */
+.post-author {
+    font-size: 1.1em;
+    color: #666;
+}
+
+/* 모바일 화면에서 가독성 향상 */
+@media (max-width: 768px) {
+    .post-box {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .post-title {
+        margin-bottom: 10px;
+    }
+
+    .post-author {
+        font-size: 1em;
+    }
+}

@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>게시글 상세</title>
+    <link rel="stylesheet" th:href="@{/css/post-detail.css}">
+    <link rel="stylesheet" th:href="@{~/css/header.css}">
+
+</head>
+<body>
+
+<div th:replace="~{header :: header}"></div>
+
+<div class="post-container">
+    <div class="post-header">
+        <h1 class="post-title" th:text="${post.title}"></h1>
+
+        <!-- 글 삭제 버튼 -->
+        <div th:if="${session.member != null && session.member.id == post.member.id}">
+            <form action="/delete/post" method="POST">
+                <input type="hidden" name="postId" th:value="${post.id}">
+                <button type="submit" class="delete-button">글 삭제</button>
+            </form>
+        </div>
+    </div>
+
+    <div class="post-details">
+        <p><strong>작성자:</strong> <span th:text="${post.member.nickname}"></span></p>
+        <p><strong>내용</strong></p>
+        <p th:text="${post.content}"></p>
+    </div>
+
+    <hr>
+
+    <div th:if="${session.member == null}">
+        <a th:href="@{/members/login}" class="login-link">로그인 후 댓글 작성이 가능합니다</a>
+    </div>
+
+    <div th:if="${session.member != null}" class="comment-form">
+        <form action="/check/comment" method="POST" onsubmit="validateComment(event)">
+            <input name="commentContent" placeholder="댓글 작성" class="comment-input">
+            <input type="hidden" name="memberId" th:value="${session.member.id}">
+            <input type="hidden" name="postId" th:value="${post.id}">
+            <button type="submit" class="submit-button">등록</button>
+        </form>
+    </div>
+
+    <div th:if="${comments != null and !comments.empty}" class="comments-section">
+        <h3>댓글</h3>
+        <div th:each="comment : ${comments}" class="comment-item">
+            <p><strong>작성자:</strong> <span th:text="${comment.member.nickname}"></span></p>
+            <p><strong>댓글 내용:</strong> <span th:text="${comment.commentContent}"></span></p>
+
+            <div th:if="${session.member != null && session.member.id == comment.member.id}" class="comment-actions">
+                <form action="/delete/comment" method="POST">
+                    <input type="hidden" name="commentId" th:value="${comment.id}">
+                    <input type="hidden" name="postId" th:value="${post.id}">
+                    <button type="submit" class="delete-button">댓글 삭제</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div th:if="${comments == null or comments.empty}" class="no-comments">
+        <p>댓글이 없습니다.</p>
+    </div>
+
+    <a href="/post/list" class="back-to-list">목록으로</a>
+</div>
+
+<script>
+    function validateComment(event) {
+        let commentInput = document.querySelector("input[name='commentContent']");
+        if (!commentInput.value.trim()) {
+            alert("댓글을 입력하세요.");
+            event.preventDefault(); // 폼 전송 방지
+        }
+    }
+</script>
+
+</body>
+</html>

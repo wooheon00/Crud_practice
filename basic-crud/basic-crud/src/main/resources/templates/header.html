@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Header</title>
+    <link rel="stylesheet" th:href="@{~/css/header.css}">
+</head>
+<body>
+<!-- 헤더 조각 정의 -->
+<header th:fragment="header" class="header">
+    <nav class="header-nav">
+        <!-- 왼쪽 로고 & 네비게이션 -->
+        <div class="header-left">
+            <a th:href="@{/main}">홈</a>
+            <a th:href="@{/post/list}">게시판</a>
+            <span> <최우헌 연습판> </span>
+        </div>
+
+        <!-- 로그인 상태에 따라 버튼 변경 -->
+        <div th:if="${session.member == null}" class="header-login">
+            <a th:href="@{/members/login}" class="login-btn">로그인</a>
+            <a th:href="@{/members/register}" class="register-btn">회원가입</a>
+        </div>
+
+        <div th:if="${session.member != null}" class="header-logged-in">
+            <span th:text="${session.member.nickname + '님 환영합니다.'}" class="welcome-msg"></span>
+            <a th:href="@{/post/writing}" class="write-post-btn">글 작성</a>
+            <a th:href="@{/logout}" class="logout-btn">로그아웃</a>
+            <a th:href="@{/members/{id}(id=${session.member.id})}" class="my-page-btn">마이 페이지</a>
+        </div>
+
+        <!-- 관리자 전용 -->
+        <div th:if="${session.member != null and session.member.nickname eq 'picaso'}" class="header-admin">
+            <a th:href="@{/debug/member}">회원 데이터</a>
+            <a th:href="@{/debug/post}">글 데이터</a>
+            <a th:href="@{/debug/comment}">댓글 데이터</a>
+        </div>
+    </nav>
+</header>
+</body>
+</html>

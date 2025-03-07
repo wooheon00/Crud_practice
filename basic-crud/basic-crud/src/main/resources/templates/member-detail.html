@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>마이 페이지</title>
+    <link rel="stylesheet" th:href="@{/css/member-detail.css}">
+    <link rel="stylesheet" th:href="@{~/css/header.css}">
+
+</head>
+<body>
+
+<div th:replace="~{header :: header}"></div>
+
+<div class="profile-container">
+    <h1 th:text="${session.member.nickname} + '님의 마이 페이지'"></h1>
+
+    <div class="profile-info">
+        <p><strong>작성 글 수:</strong> <span th:text="${postCnt}"></span></p>
+        <p><strong>작성 댓글 수:</strong> <span th:text="${commentCnt}"></span></p>
+    </div>
+
+    <form action="/delete/member" method="POST" class="delete-form">
+        <input type="hidden" name="id" th:value="${session.member.id}">
+        <button type="submit" class="delete-button">회원 탈퇴</button>
+    </form>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>회원 가입</title>
+    <link rel="stylesheet" th:href="@{/css/login-register.css}">
+    <link rel="stylesheet" th:href="@{~/css/header.css}">
+
+</head>
+<body>
+
+<div th:replace="~{header :: header}"></div>
+
+<div class="form-container">
+    <h4>회원 가입</h4>
+
+    <div th:if="${error}" th:text="${error}" class="error-message"></div>
+
+    <form action="/check/register" method="POST" onsubmit="validateForm(event)" class="auth-form">
+        <input name="memberName" placeholder="이름" class="form-input">
+        <input name="password" placeholder="비밀번호" type="password" class="form-input">
+        <input name="nickname" placeholder="닉네임" class="form-input">
+        <button type="submit" class="form-button">회원 가입</button>
+    </form>
+
+    <p class="form-link">이미 회원이신가요? <a href="/members/login">로그인</a></p>
+</div>
+
+<script>
+    function validateForm(event) {
+        let inputs = document.querySelectorAll("input");
+        for (let input of inputs) {
+            if (!input.value.trim()) {
+                alert(input.placeholder + "을(를) 입력하세요.");
+                event.preventDefault(); // 폼 전송 방지
+                return;
+            }
+        }
+    }
+</script>
+
+</body>
+</html>

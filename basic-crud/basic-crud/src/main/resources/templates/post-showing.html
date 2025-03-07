@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>게시글 목록</title>
+    <link rel="stylesheet" th:href="@{/css/post-showing.css}"> <!-- 스타일 시트 링크 -->
+    <link rel="stylesheet" th:href="@{~/css/header.css}">
+
+</head>
+<body>
+
+<div th:replace="~{header :: header}"></div>
+
+<h1>게시글 목록</h1>
+
+<!-- 게시글 목록 컨테이너 -->
+<div class="post-list-container">
+    <div th:each="post : ${posts}" class="post-item">
+        <!-- 게시글 항목을 클릭하면 상세 페이지로 이동 -->
+        <a th:href="@{/post/{id}(id=${post.id})}" class="post-link">
+            <div class="post-box">
+                <span class="post-title" th:text="${post.title}"></span>
+                <span class="post-author">작성자: <span th:text="${post.member.nickname}"></span></span>
+            </div>
+        </a>
+    </div>
+</div>
+
+</body>
+</html>

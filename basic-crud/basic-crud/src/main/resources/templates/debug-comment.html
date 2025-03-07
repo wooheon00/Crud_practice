@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <link rel="stylesheet" th:href="@{~/css/header.css}">
+
+    <meta charset="UTF-8">
+    <title>Member Debug</title>
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        th, td {
+            border: 1px solid black;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+
+<div th:replace="~{header :: header}"></div>
+
+<h2>Comment List</h2>
+
+<table>
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>post</th>
+        <th>member nickname</th>
+        <th>Content</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="comment : ${comments}">
+        <td th:text="${comment.id}"></td>
+        <td th:text="${comment.post.title}"></td>
+        <td th:text="${comment.member.nickname}"></td>
+        <td th:text="${comment.commentContent}"></td>
+    </tr>
+    </tbody>
+</table>
+
+</body>
+</html>
